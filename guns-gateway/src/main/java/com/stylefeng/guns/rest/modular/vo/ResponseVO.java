@@ -13,7 +13,24 @@ public class ResponseVO<M> {
 
     private String imgPre;
 
+    private int nowPage;
+
+    private int totalPage;
+
+
     private ResponseVO(){}
+
+    //成功返回
+    public static<M> ResponseVO success(int nowPage,int totalPage,String imgPre,M m){
+        ResponseVO responseVO =new ResponseVO();
+        responseVO.setData(m);
+        responseVO.setStatus(0);
+        responseVO.setImgPre(imgPre);
+        responseVO.setNowPage(nowPage);
+        responseVO.setTotalPage(totalPage);
+        return responseVO;
+    }
+
     //成功返回
     public static<M> ResponseVO success(String imgPre,M m){
         ResponseVO responseVO =new ResponseVO();
