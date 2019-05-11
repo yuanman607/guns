@@ -42,7 +42,18 @@ spring:
       filters: log4j,wall,mergeStat
       hikari:
         health-check-registry:
-
+  redis:
+    database: 0
+    timeout: 100
+    host: localhost
+    password: 12345
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 9
+        min-idle: 0
+    port: 6379
 logging:
   level.root: info
   level.com.stylefeng: debug

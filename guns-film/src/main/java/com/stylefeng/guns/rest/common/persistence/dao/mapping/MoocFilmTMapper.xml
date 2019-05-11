@@ -18,5 +18,7 @@
         <result column="film_time" property="filmTime" />
         <result column="film_status" property="filmStatus" />
     </resultMap>
+<select id="">
 
+</select>
 </mapper>

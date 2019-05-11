@@ -10,8 +10,11 @@ import com.stylefeng.guns.core.util.DateUtil;
 import com.stylefeng.guns.rest.common.persistence.dao.*;
 import com.stylefeng.guns.rest.common.persistence.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,8 @@ public class DefaultFilmServiceImpl implements FilmServiceApi {
     private MoocYearDictTMapper moocYearDictTMapper;
     @Autowired
     private MoocSourceDictTMapper moocSourceDictTMapper;
-
+    @Resource
+    private StringRedisTemplate redis;
     @Override
     public List<BannerVO> getBanners() {
         List<BannerVO>result=new ArrayList<BannerVO>();
@@ -66,6 +70,8 @@ public class DefaultFilmServiceImpl implements FilmServiceApi {
     public FilmVO getHotFilms(boolean isLimit, int nums,int nowPage,int sortId,int sourceId,int yearId,int catId) {
         FilmVO filmVO=new FilmVO();
         List<FilmInfo>filmInfos=new ArrayList<FilmInfo>();
+
+        System.out.println(redis.opsForValue().get("route")+"----2------");
 
         EntityWrapper<MoocFilmT> entityWrapper=new EntityWrapper<MoocFilmT>();
         entityWrapper.eq("film_status","1");
@@ -302,5 +308,17 @@ public class DefaultFilmServiceImpl implements FilmServiceApi {
         filmVO.setNowPage(nowPage);
         filmVO.setFilmInfoList(filmInfos);
         return filmVO;
+    }
+
+    @Override
+    public FilmDetailVO getFilmDetail(int searchType,String searchParam) {
+        //searchType 1-->按名称 2--》按id
+        if(searchType==1){
+
+        }else{
+
+        }
+
+        return null;
     }
 }
